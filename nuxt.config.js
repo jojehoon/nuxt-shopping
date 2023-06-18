@@ -49,5 +49,5 @@ export default {
     port: 8000,
   },
 
-  target: 'server',
+  target: process.env.NODE_ENV === 'production' ? null : 5000,
 };
