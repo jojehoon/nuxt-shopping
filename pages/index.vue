@@ -26,10 +26,8 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { fetchProductByKeyword } from '~/api'
-// import ProductsList from '../components/ProductList.vue'
-import SearchInput from '~/components/SearchInput.vue'
+import { fetchProductByKeyword, fetchProducts } from '~/api';
+import SearchInput from '~/components/SearchInput.vue';
 
 export default {
   name: 'MainPage',
@@ -37,42 +35,42 @@ export default {
     SearchInput,
   },
   async asyncData(context) {
-    const response = await axios.get('http://localhost:3000/products')
+    const response = await fetchProducts();
     const products = response.data.map((item) => ({
       ...item,
       imageUrl: `${item.imageUrl}?rendom=${Math.random()}`,
-    }))
+    }));
 
     return {
       products,
-    }
+    };
   },
   data() {
     return {
       inputText: '',
-    }
+    };
   },
   methods: {
     async fetchProducts() {
-      const response = await axios.get('http://localhost:3000/products')
-      this.products = response.data
+      const response = await fetchProducts();
+      this.products = response.data;
     },
     moveToDetailPage(id) {
-      console.log(id)
-      this.$router.push(`detail/${id}`)
+      console.log(id);
+      this.$router.push(`detail/${id}`);
     },
     async searchProduct() {
-      const response = await fetchProductByKeyword(this.inputText)
+      const response = await fetchProductByKeyword(this.inputText);
       this.products = response.data.map((item) => ({
         ...item,
         imageUrl: `${item.imageUrl}?rendom=${Math.random()}`,
-      }))
+      }));
     },
     routeToCartPage() {
-      this.$router.push('/cart')
+      this.$router.push('/cart');
     },
   },
-}
+};
 </script>
 
 <style>
