@@ -18,33 +18,44 @@
 </template>
 
 <script>
-import { fetchProductById, createCartItem } from '@/api/index'
+import { fetchProductById, createCartItem } from '@/api/index';
 
 export default {
+  head: {
+    title: 'Shopping Item Detail',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: '이 상품은 ~~입니다',
+      },
+    ],
+  },
+
   async asyncData({ params }) {
     try {
-      const response = await fetchProductById(params.id)
-      const product = response.data
+      const response = await fetchProductById(params.id);
+      const product = response.data;
 
       return {
         product,
-      }
+      };
     } catch (error) {
       error({
         statusCode: 503,
         message: 'API 요청이 실패했습니다',
-      })
+      });
     }
   },
   methods: {
     async addToCart() {
-      const response = await createCartItem(this.product)
-      console.log(response)
-      this.$store.commit('addCartItems', this.product)
-      this.$router.push('/cart')
+      const response = await createCartItem(this.product);
+      console.log(response);
+      this.$store.commit('addCartItems', this.product);
+      this.$router.push('/cart');
     },
   },
-}
+};
 </script>
 
 <style scoped>
