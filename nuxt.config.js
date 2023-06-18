@@ -14,6 +14,10 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  router: {
+    mode: `history`,
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/reset.css'],
 
