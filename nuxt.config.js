@@ -50,7 +50,7 @@ export default {
     port: process.env.NODE_ENV === 'production' ? null : 6600,
   },
 
-  target: 'server',
+  target: 'static',
 
   // ENV config
   env: {
